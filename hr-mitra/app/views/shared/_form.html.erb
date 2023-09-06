@@ -1,0 +1,135 @@
+<%= form_with model: @employee, local: true do |form|%>
+
+
+<!--
+<% if @employee.errors.any? %>
+	<div class="col-lg-12">
+	<%# <p class="lead">Please fix the below errors</p> %>
+  <%#debugger%>
+    <div id="error_explanation">
+      <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+  	    <% @employee.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+			  <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
+-->
+
+
+
+
+ <div class="form-group" >
+<div class="row m-auto"  style="width: 90%;">
+  <div class="col-md-5 ">
+  <%= form.label :F_Name %>
+  <%= form.text_field :F_Name, class:"form-control"%>
+  <% @employee.errors.full_messages_for(:F_Name).each do |message|%>
+  <p class="text-danger"><%= message%></p>
+  <%end %>
+
+    <%# <label for="inputEmail4" class="form-label">Email</label>
+    <input type="email" class="form-control" id="inputEmail4"> %>
+
+  </div>
+  <div class="col-md-5">
+    <%= form.label :L_Name %>
+    <%= form.text_field :L_Name, class:"form-control"%>
+    <% @employee.errors.full_messages_for(:L_Name).each do |message|%>
+    <p class="text-danger"><%= message%></p>
+    <%end %>
+    
+
+    <%# <label for="inputPassword4" class="form-label">Password</label>
+    <input type="password" class="form-control" id="inputPassword4"> %>
+  </div>
+  </div>
+ 
+
+ <div class="row mt-2 m-auto"  style="width: 90%;" >
+ <div class="col-md-10">
+    <%= form.label :Adreess%>
+    <%= form.text_field :Adreess, class:"form-control"%>
+    <% @employee.errors.full_messages_for(:Adreess).each do |message|%>
+    <p class="text-danger"><%= message%></p>
+    <%end %>
+    </div>
+  </div>
+
+ <div class="row mt-2 m-auto"  style="width: 90%;">
+  <div class="col-md-5">
+  <%= form.label :Mail_Id %>
+  <%= form.text_field :Mail_Id, class:"form-control"%>
+  <% @employee.errors.full_messages_for(:Mail_Id).each do |message|%>
+  <p class="text-danger"><%= message%></p>
+  <%end %>
+
+  </div>
+  <div class="col-md-5">
+    <%= form.label :Contact_No%>
+    <%= form.text_field :Contact_No, class:"form-control"%>
+    <% @employee.errors.full_messages_for(:Contact_No).each do |message|%>
+    <p class="text-danger"><%= message%></p>
+    <%end %>
+    </div>
+  </div>
+
+
+  <div class="row mt-2 m-auto"  style="width: 90%;">
+  <div class="col-md-5">
+  <%= form.label :date_of_birth %>
+  <%= form.date_field :date_of_birth, class:"form-control"%>
+  <% @employee.errors.full_messages_for(:date_of_birth).each do |message|%>
+  <p class="text-danger"><%= message%></p>
+  <%end %>
+  </div>
+
+  <div class="col-md-5">
+ <%= form.label :date_of_joining %>
+  <%= form.date_field :date_of_joining, class:"form-control"%>
+  <% @employee.errors.full_messages_for(:date_of_joining).each do |message|%>
+  <p class="text-danger"><%= message%></p>
+  <%end %>
+  </div>
+  </div>
+  
+
+  <div class="col-md-4 mt-4 mb-4 m-auto"  style="width: 90%;">
+      <%= form.label :Department%>
+      <%= form.select :Department, ["Select below option","Software Engineering","Quality Analyst","Human Resources","Finance","Administrattion"],{selected:['Select below option'],disabled: ['Select below option']}, {id: "Select"}  %>
+      <% @employee.errors.full_messages_for(:Department).each do |message|%>
+      <p class="text-danger"><%= message%></p>
+      <%end %>
+    
+      <%# <select size="lg">
+      <option selected>Choose...</option>
+      <option>Software Engineering</option>
+      <option>Quality Analyst</option>
+      <option>Human Resources</option>
+      <option>Finance</option>
+      <option>Administrattion</option> %>
+    <%# </select> %>
+  </div>
+  <%# <div class="col-12 mt-5 mb-5">
+    <div class="form-check">
+
+    <%= form.label :Check_me_out, class:"form-check-label"
+    <%= form.check_box :check_box, class:"form-check-input"
+
+    </div>
+  </div> %>
+  <div class="col-lg-12">
+  <div class="col-md-12 mt-5 m-auto"  style="width: 90%;">
+      <%= form.submit class:"btn btn-primary "%>
+  </div>
+    <%# <button type="submit" class="btn btn-primary">Sign in</button> %>
+  <div class="col-md-12 d-grid d-md-flex justify-content-end m-auto"  style="width: 90%;  ">
+      <%= link_to "Back", employees_path,class:"btn btn-primary"%>
+  </div>
+  </div>
+  </div>
+  <%# </div> %>
+  <% end %>
+

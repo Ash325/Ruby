@@ -1,0 +1,56 @@
+
+<%= render "shared/flash"%>
+
+
+
+<div class="card mt-5 mb-5 m-auto" >
+  <div class="card-body">
+    <h1 class="text-center">Document Uploaded List</h1>
+    </div>
+</div>
+
+
+
+<table class="table table-hover table-striped table-bordered ml-5 m-auto">
+  <thead class="table-dark">
+    <tr>
+      <th>#</th>
+      <%# <th>First</th>
+      <th>Last</th> %>
+      <th>Document Name</th>
+      <th>Document Type</th>
+      <th>Employee Name</th>
+      <th>Employee ID</th>
+      <th style="width:14%">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  <script>
+    console.log(1)
+    </script>
+    
+
+  <% @documents.each do |d| %>
+    <tr>
+      <td><%= d.id %></td>
+      <%# <td><%= e.F_Name </td>%>
+      <%# <td><%= e.L_Name </td>  %> 
+      <td><%= d.name %></td>
+      <td><%= d.doc_type %></td>
+      <td><%= link_to d.employee.name, employee_path(d.employee) %></td>
+      <td><%= d.employee.id %></td>
+      <td>
+         <%= link_to "Edit", edit_document_path(d), class:"btn btn-outline-warning bg-primary btn-sm"%>
+      <%= link_to "View", document_path(d), class:"btn btn-outline-warning bg-secondary btn-sm"%>
+      <%= link_to "Delete", document_path(d), class:"btn btn-outline-warning bg-danger btn-sm", method: :delete, data: {confirm: "Are you sure to delete the employee's document?"}%>
+      </div>
+      </td>
+      </tr>  
+    <% end %>
+    
+  </tbody>
+</table>
+
+<div class="d-grid gap-2 mt-5 d-md-flex justify-content-md-end">
+<%= link_to "Add New Document", new_document_path, class:"btn btn-primary"%>
+</div>

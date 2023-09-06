@@ -1,0 +1,226 @@
+
+<!--
+<div class="alert alert-success" role="alert">
+    <%= flash[:notice]%>
+</div>
+-->
+<%= render "shared/flash"%>
+
+
+
+<div class="card mt-5 mb-5 m-auto" >
+  <div class="card-body">
+    <h1 class="text-center">Employees List</h1>
+    </div>
+</div>
+
+<!--
+
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        View List In
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <li><%= link_to "Table", employees_path(view_type: "table"), class:"dropdown-item  "%></li>
+      <li><%= link_to "Accordain", employees_path(view_type: "accordain"), class:"dropdown-item  "%></li>
+      </ul>
+    </div>
+-->
+
+
+<div class="row">
+<div class="col">
+<%= link_to "Table", employees_path(view_type: "table"), class:"btn btn-outline-warning bg-success "%>
+<%= link_to "Accordain", employees_path(view_type: "accordain"), class:"btn btn-outline-warning bg-success"%>
+</div>
+</div>
+
+
+<% if params[:view_type] != "accordain"%>
+<table class="table table-hover table-striped table-bordered mt-3 ml-5 m-auto">
+  <thead class="table-dark">
+    <tr>
+      <th>#</th>
+      <%# <th>First</th>
+      <th>Last</th> %>
+      <th>Name</th>
+      <th>Department</th>
+      <th>Adreess</th>
+      <th>Mail_Id</th>
+      <th>Contact_No</th>
+      <th>Date_of_Birth</th>
+      <th>Date_of_Joining</th>
+      <th style="width:14%">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  <script>
+      console.log(1)
+      </script>
+  <% @employee.each do |e| %>
+    <tr>
+      <td><%= e.id %></td>
+      <%# <td><%= e.F_Name </td>%>
+      <%# <td><%= e.L_Name </td>  %> 
+      <td><%= e.name %></td>
+      <td><%= e.Department %></td>
+      <td><%= e.Adreess %></td>
+      <td><%= e.Mail_Id %></td>
+      <td><%= e.Contact_No %></td>
+      <td><%= e.date_of_birth%></td>
+      <td><%= e.date_of_joining%></td>
+      <td>
+      <%= link_to "Edit", edit_employee_path(e), class:"btn btn-outline-warning bg-primary btn-sm"%>
+      <%= link_to "View", employee_path(e), class:"btn btn-outline-warning bg-secondary btn-sm"%>
+      <%= link_to "Delete", employee_path(e), class:"btn btn-outline-warning bg-danger btn-sm", method: :delete, data: {confirm: 'Are you sure to delete this employee?'}%>
+      </td>
+    <%end %>
+    </tr>
+  </tbody>
+</table>
+<%end %>
+
+
+
+
+
+
+
+
+<% if params[:view_type].present?  &&  params[:view_type] == "accordain"%>
+<div class="accordion mt-5" id="accordionExample">
+  <% @employee.each do |e| %>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading<%= e.id%>">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= e.id%>" aria-expanded="true" aria-controls="collapse<%= e.id%>">
+        <%= e.name_mail%>
+      </button>
+    </h2>
+    <div id="collapse<%= e.id%>" class="accordion-collapse collapse" aria-labelledby="heading<%= e.id%>" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+
+        <div class="col-lg-12">
+          <div class="card mt-5 mb-5 m-auto"  style="width: 90%;">
+            <div class="card-body">
+              <h1 class="text-center">View Employee Details</h1>
+            </div>
+          </div>
+
+
+
+          <div class="row ">
+            <div class="col-md-6">
+              <h3> First Name <h3>
+              <%= e.F_Name%>
+            </div>
+            <div class="col-md-6">
+              <h3> Last Name <h3>
+              <%= e.L_Name%>
+            </div>
+          </div>
+
+          <div class="col-12 mt-5">
+            <h3> Address <h3>
+            <%= e.Adreess%>
+          </div>
+
+          <div class="row mt-5">
+            <div class="col-md-6">
+              <h3> Mail ID <h3>
+              <%= e.Mail_Id%>
+            </div>
+
+            <div class="col-md-6">
+              <h3> Contact_No <h3>
+              <%= e.Contact_No%>
+            </div>
+          </div>
+
+          <div class="row mt-5">
+            <div class="col-md-6">
+              <h3> Date_of_Birth <h3>
+            <%= e.date_of_birth%>
+          </div>
+          <div class="col-md-6">
+            <h3> Date_of_Joining <h3>
+            <%= e.date_of_joining%>
+          </div>
+        </div>
+
+        <div class="col-md-4 mt-5 mb-4">
+          <h3> Department <h3>
+          <%= e.Department%>
+        </div>
+
+
+        <% if e.documents.present? %>
+          <div class="row mt-5">
+            <h2 class="text-center">Employee Documents</h2>
+              <% e.documents.each do |d| %>
+          </div>
+          <div class="card mt-4">
+            <div class="card-body">
+              <div class="row">
+                <% if d.doc_upload.attached? %>
+                  <div class="col-lg-4">
+                  <%= image_tag d.doc_upload, class:"img-fluid"%>
+                  </div>
+                <%end%>
+                <div class="col-lg-4">
+                  <p class="lead"><%= d.name %></p>
+                </div>
+                <div class="col-lg-4">
+                  <p class="lead"><%= d.doc_type %></p>
+                </div>
+              </div>
+            </div>
+        <%end%>
+      </div>
+  
+<%# <!-- %>
+<%# --> %>
+<%end%>
+
+
+
+
+<div class="col-lg-12">
+  <div class="col-md-12 mt-5 m-auto"  style="width: 90%;">
+      <%= link_to "Edit", edit_employee_path(e), class:"btn btn-outline-warning bg-primary"%>
+  </div>
+    <%# <button type="submit" class="btn btn-primary">Sign in</button> %>
+  <div class="col-md-12 d-grid d-md-flex justify-content-end m-auto"  style="width: 90%;  ">
+      <%= link_to "Delete", employee_path(e), class:"btn btn-outline-warning bg-danger", method: :delete, data: {confirm: 'Are you sure to delete this employee?'}%>
+  </div>
+  </div>
+  </div>
+ 
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+
+    <%end %>
+
+
+
+
+<%# <%= column_chart @graph_data %>
+
+
+
+<div class="d-grid gap-2 mt-5 d-md-flex justify-content-md-end">
+
+<%= link_to "Add New Employee", new_employee_path, class:"btn btn-primary"%>
+<%# <%= link_to "Resources_Graph", graph_path, class:"btn btn-outline-warning bg-success"%> 
+</div>
+
+<%# 
+scope="col"
+scope="col"
+scope="col"
+scope="col"
+scope="col"
+scope="col"
+scope="col" %>

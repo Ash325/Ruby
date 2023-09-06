@@ -1,0 +1,53 @@
+<div class="col-lg-12">
+  <div class="card mt-5 mb-5 m-auto"  style="width: 90%;">
+    <div class="card-body">
+      <h1 class="text-center">View Employee Details</h1>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="row ">
+  <div class="col-md-6">
+    <h3> Document Name </h3>
+      <%= @document.name%>
+  </div>
+
+  <div class="col-md-6">
+    <h3> Document Type </h3>
+    <%= @document.doc_type%>
+  </div>
+</div>
+
+
+<div class="row mt-5">
+  <div class="col-md-6">
+    <h3> Employee ID</h3>
+    <%= @document.employee_id%>
+  </div>
+
+  <div class="col-md-6">
+    <h3> Employee Name</h3>
+    <%= @document.employee.name%>
+  </div>
+</div>
+
+
+
+  <% if @document.doc_upload.attached? %>
+  <%# <div class="img mt-5 "> %>
+    <%= image_tag @document.doc_upload,class:"img mt-5 mx-auto d-block",style:" width: 40%;"%>
+    <h3 class=" d-grid d-md-flex justify-content-center mt-2"> Document Image </h3>
+  <%# </div>   %>
+  <% end %>
+
+    
+<div class="col-lg-12">
+  <div class="col-md-12 mt-5">
+      <%= link_to "Edit", edit_document_path, class:"btn btn-primary" %>
+      <div class="col-md-12 d-grid d-md-flex justify-content-end">
+          <%= link_to "Back", documents_path,class:"btn btn-primary"%>
+      </div>
+  </div>
+</div>

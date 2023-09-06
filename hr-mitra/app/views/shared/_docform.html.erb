@@ -1,0 +1,87 @@
+<%= form_with model: @document, local: true do |form|%>
+
+
+
+
+<div class=" d-grid d-md-flex justify-content-center">
+<div class=" col-lg-6 mb-4">
+        <%= form.label :name %>
+         <%= form.text_field :name, class:"form-control"%>
+        <% @document.errors.full_messages_for(:name).each do |message|%>
+         <p class="text-danger"><%= message%></p>
+         <%end %>
+</div>
+</div>
+
+
+<div class=" d-grid d-md-flex justify-content-center">
+<div class="col-lg-6 mb-4">
+    <%= form.label :doc_type %>
+    <%= form.select :doc_type, options_for_select(Document::Doc_Types, selected: @document.doc_type),
+    {prompt: :none}, {class: "form-select form-select-lg"}%>
+
+    <%# We can customize prompt as what we want to show like this ::   prompt: "Select Document type" %>
+    <%# <%= form.text_field :doc_type, class:"form-control"%> 
+    <% @document.errors.full_messages_for(:doc_type).each do |message|%>
+    <p class="text-danger"><%= message%></p>
+    <%end %>
+</div>
+</div>
+
+
+<div class=" d-grid d-md-flex justify-content-center">
+<div class=" col-lg-6 mb-5">
+    <%= form.label :employee_id %>
+
+
+
+    <%# First is by Pluck in which we have to give attributes, method name will not work %>
+
+<%# <%= form.select :employee_id, options_for_select(Employee.pluck(:F_Name, :id) selected: @document.employee_id), %>
+    <%# {prompt: :none}, {class: "form-select form-select-lg"}%> 
+    <%# <% @document.errors.full_messages_for(:employee_id).each do |message|%> 
+
+
+
+    <%# Secondly by map %>
+    <%# First we are giviving by name,  %>
+<%# <%= form.select :employee_id, options_for_select(Employee.all.map {|employee| [employee.name, employee.id]},  selected: @document.employee_id),{prompt: :none}, {class: "form-select form-select-lg"}%> 
+    <%# <% @document.errors.full_messages_for(:employee_id).each do |message|%> 
+
+
+
+    <%# but name can be same, so we will define a name+mail method an show here  %>
+     <%= form.select :employee_id, options_for_select(Employee.all.map {|employee| [employee.name_mail, employee.id]},  selected: @document.employee_id),{prompt: :none}, {class: "form-select form-select-lg"}%>
+    <% @document.errors.full_messages_for(:employee_id).each do |message|%>
+
+
+
+    <p class="text-danger"><%= message%></p>
+    <%end %>
+</div>
+</div>
+
+<div class=" d-grid d-md-flex justify-content-center">
+<div class=" col-lg-6 mb-5">
+<%=form.label :doc_upload %>  : 
+<%= form.file_field :doc_upload ,class:"btn btn-sm"%>
+</div>
+</div>
+
+
+<div class="row">
+<div class=" d-grid d-md-flex justify-content-center">
+<div class=" col-lg-6">
+      <%= form.submit class:"btn btn-primary "%>
+</div>
+<div class=" d-grid d-md-flex justify-content-center">
+<div class=" col-lg-6">
+      <%= link_to "Back", documents_path,class:"btn btn-secondary"%>
+</div>
+</div>
+</div>
+
+
+
+  <%# </div> %>
+  <% end %> 
